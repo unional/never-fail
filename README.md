@@ -11,12 +11,15 @@
 Never fail.
 
 ```ts
-import neverFail from 'never-fail'
+import nf, { ignoreFailure, neverFail, warnFailure } from 'never-fail'
+
+// default export and `neverFail()` is an alias of `ignoreFailure()`
+// `warnFailure()` is the same as `ignoreFailure()` but emit `console.warn()` message during failure
 
 (async () => {
-  await neverFail(() => anyCall())
-  await neverFail() => returnRejectedPromise())
-  await neverFail(rejectedPromise)
+  await ignoreFailure(() => anyCall())
+  await ignoreFailure() => returnRejectedPromise())
+  await ignoreFailure(rejectedPromise)
 }())
 ```
 

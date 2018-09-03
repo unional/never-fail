@@ -1,17 +1,7 @@
-function neverFail(fnOrPromise) {
-  if (!fnOrPromise) return fnOrPromise
+export * from './ignoreFailure'
+export * from './warnFailure'
 
-  if (typeof fnOrPromise === 'function')
-    try { return noReject(fnOrPromise()) } catch { }
-  else
-    return noReject(fnOrPromise)
-}
+import { ignoreFailure } from './ignoreFailure'
 
-function noReject(maybePromise) {
-  if (typeof maybePromise.then === 'function') {
-    return maybePromise.then(x => x, x => undefined)
-  }
-  return maybePromise
-}
-export { neverFail }
+export const neverFail = ignoreFailure
 export default neverFail
