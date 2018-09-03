@@ -19,12 +19,18 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: npm install
+      - run: npm install --no-save semantic-release greenkeeper-lockfile
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+      - run:
+          name: update greenkeeper lockfile
+          command: ./node_modules/.bin/greenkeeper-lockfile-update
       - run: npm run verify
+      - run:
+          name: upload greenkeeper lockfile
+          command: ./node_modules/.bin/greenkeeper-lockfile-upload
       - run: npm run semantic-release || true
   node9:
     docker:
