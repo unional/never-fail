@@ -57,5 +57,5 @@ https://badges.greenkeeper.io/unional/never-fail.svg
 [green-keeper-url]:https://greenkeeper.io/
 [semantic-release-image]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]:https://github.com/semantic-release/semantic-release
-[circleci-image]: https://circleci.com/gh/unional/never-fail/tree/master.svg?style=svg
+[circleci-image]: https://circleci.com/gh/unional/never-fail/tree/master.svg?style=shield
 [circleci-url]: https://circleci.com/gh/unional/never-fail/tree/master

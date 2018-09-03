@@ -6,10 +6,15 @@ workflows:
       - node-latest
       - node9
       - node8
+      - release:
+          requires:
+            - node-latest
+            - node9
+            - node8
 jobs:
   node-latest:
     docker:
-      - image: 'circleci/node:9'
+      - image: 'circleci/node:10'
     steps:
       - checkout
       # Download and cache dependencies
@@ -19,19 +24,11 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: npm install
-      - run: npm install --no-save semantic-release greenkeeper-lockfile
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: update greenkeeper lockfile
-          command: ./node_modules/.bin/greenkeeper-lockfile-update
       - run: npm run verify
-      - run:
-          name: upload greenkeeper lockfile
-          command: ./node_modules/.bin/greenkeeper-lockfile-upload
-      - run: npm run semantic-release || true
   node9:
     docker:
       - image: 'circleci/node:9'
@@ -65,5 +62,28 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
       - run: npm run verify
+  release:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm install
+      - run: npm install --no-save semantic-release greenkeeper-lockfile
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: update greenkeeper lockfile
+          command: ./node_modules/.bin/greenkeeper-lockfile-update
+      - run: npm run build
+      - run:
+          name: upload greenkeeper lockfile
+          command: ./node_modules/.bin/greenkeeper-lockfile-upload
+      - run: npx semantic-release
