@@ -3,13 +3,14 @@ import { ignoreFailure } from '.';
 
 test('return non-funcion and promise', () => {
   const x = { then: 1 }
-  t.strictEqual(ignoreFailure(x), x)
-  t.strictEqual(ignoreFailure(1), 1)
-  t.strictEqual(ignoreFailure(undefined), undefined)
-  t.strictEqual(ignoreFailure(null), null)
-  t.strictEqual(ignoreFailure(false), false)
-  t.strictEqual(ignoreFailure(true), true)
-  t.strictEqual(ignoreFailure('a'), 'a')
+
+  t.strictEqual(ignoreFailure(x as any), x)
+  t.strictEqual(ignoreFailure(1 as any), 1)
+  t.strictEqual(ignoreFailure(undefined as any), undefined)
+  t.strictEqual(ignoreFailure(null as any), null)
+  t.strictEqual(ignoreFailure(false as any), false)
+  t.strictEqual(ignoreFailure(true as any), true)
+  t.strictEqual(ignoreFailure('a' as any), 'a')
 })
 
 test('execute normal function', async () => {

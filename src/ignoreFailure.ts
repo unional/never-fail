@@ -1,3 +1,5 @@
+export function ignoreFailure<T>(promise: Promise<T>): Promise<T>
+export function ignoreFailure<T>(fn: () => T): T
 export function ignoreFailure(fnOrPromise) {
   if (!fnOrPromise) return fnOrPromise
 
