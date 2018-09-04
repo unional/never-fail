@@ -66,6 +66,11 @@ jobs:
   release:
     docker:
       - image: 'circleci/node:10'
+    filters:  # using regex filters requires the entire branch to match
+      branches:
+        only:  # only branches matching the below regex filters will run
+          - master
+          - /rel-.*/
     steps:
       - checkout
       - restore_cache:
