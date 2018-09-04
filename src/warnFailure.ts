@@ -1,16 +1,16 @@
 import { tersify } from 'tersify'
-export function warnFailure(fnOrPromise) {
+export function warnFailure(fnOrPromise, message?) {
   if (!fnOrPromise) return fnOrPromise
 
   if (typeof fnOrPromise === 'function') {
-    const fnMsg = tersify(fnOrPromise)
+    const fnMsg = message || tersify(fnOrPromise)
     try { return warnReject(fnOrPromise(), fnMsg) }
     catch (e) {
       console.warn(`${fnMsg} throws ${e}`)
     }
   }
   else
-    return warnReject(fnOrPromise)
+    return warnReject(fnOrPromise, message)
 }
 
 function warnReject(maybePromise, message?) {
