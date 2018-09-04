@@ -39,3 +39,15 @@ test('not reject when fn throws', async () => {
 test('not reject when promise rejects', async () => {
   t.strictEqual(await warnFailure(Promise.reject('reject')), undefined)
 })
+
+test('custom message', async () => {
+  t.strictEqual(await warnFailure(() => { throw new Error('throwing') }, 'doing x'), undefined)
+})
+
+test('custom message', async () => {
+  t.strictEqual(await warnFailure(() => Promise.reject('reject'), 'doing x'), undefined)
+})
+
+test('custom message', async () => {
+  t.strictEqual(await warnFailure(Promise.reject('reject'), 'doing x'), undefined)
+})
