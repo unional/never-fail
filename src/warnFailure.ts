@@ -1,5 +1,8 @@
 import { tersify } from 'tersify'
-export function warnFailure(fnOrPromise, message?) {
+
+export function warnFailure<T>(promise: Promise<T>, message?: string): Promise<T>
+export function warnFailure<T>(fn: () => T, message?: string): T
+export function warnFailure(fnOrPromise, message?: string) {
   if (!fnOrPromise) return fnOrPromise
 
   if (typeof fnOrPromise === 'function') {
