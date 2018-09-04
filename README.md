@@ -21,7 +21,7 @@ import nf, { ignoreFailure, neverFail, warnFailure } from 'never-fail'
   await ignoreFailure(() => returnRejectedPromise())
   await ignoreFailure(rejectedPromise)
   // will emit `custom message phrase throws ...` or
-  // `custom message phrase rejected with ...
+  // `custom message phrase rejected with ...`
   await warnFailure(_, 'custom message phrase')
 }())
 ```
