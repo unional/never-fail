@@ -13,12 +13,12 @@ test('return non-funcion and promise', () => {
   t.strictEqual(ignoreFailure('a' as any), 'a')
 })
 
-test('execute normal function', async () => {
+test('execute normal function', () => {
   let called = 0
   function foo() { called++ }
 
-  await ignoreFailure(foo)
-  await ignoreFailure(() => called++)
+  ignoreFailure(foo)
+  ignoreFailure(() => called++)
   t.strictEqual(called, 2)
 })
 
@@ -34,7 +34,7 @@ test('ignore rejected result', async () => {
 })
 
 test('not reject when fn throws', async () => {
-  t.strictEqual(await ignoreFailure(() => { throw new Error('throwing') }), undefined)
+  t.strictEqual(ignoreFailure(() => { throw new Error('throwing') }), undefined)
 })
 
 test('not reject when promise rejects', async () => {

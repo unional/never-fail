@@ -12,12 +12,12 @@ test('return non-funcion and promise', () => {
   t.strictEqual(warnFailure('a' as any), 'a')
 })
 
-test('execute normal function', async () => {
+test('execute normal function', () => {
   let called = 0
   function foo() { called++ }
 
-  await warnFailure(foo)
-  await warnFailure(() => called++)
+  warnFailure(foo)
+  warnFailure(() => called++)
   t.strictEqual(called, 2)
 })
 
@@ -33,7 +33,7 @@ test('ignore rejected result', async () => {
 })
 
 test('not reject when fn throws', async () => {
-  t.strictEqual(await warnFailure(() => { throw new Error('throwing') }), undefined)
+  t.strictEqual(warnFailure(() => { throw new Error('throwing') }), undefined)
 })
 
 test('not reject when promise rejects', async () => {
@@ -41,7 +41,7 @@ test('not reject when promise rejects', async () => {
 })
 
 test('custom message', async () => {
-  t.strictEqual(await warnFailure(() => { throw new Error('throwing') }, 'doing x'), undefined)
+  t.strictEqual(warnFailure(() => { throw new Error('throwing') }, 'doing x'), undefined)
 })
 
 test('custom message', async () => {
