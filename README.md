@@ -18,8 +18,11 @@ import nf, { ignoreFailure, neverFail, warnFailure } from 'never-fail'
 
 (async () => {
   await ignoreFailure(() => anyCall())
-  await ignoreFailure() => returnRejectedPromise())
+  await ignoreFailure(() => returnRejectedPromise())
   await ignoreFailure(rejectedPromise)
+  // will emit `custom message phrase throws ...` or
+  // `custom message phrase rejected with ...
+  await warnFailure(_, 'custom message phrase')
 }())
 ```
 
