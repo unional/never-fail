@@ -1,12 +1,21 @@
 {
   "name": "never-fail",
-  "description": "Check if the file path are equal",
   "version": "0.0.0-development",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "description": "Check if the file path are equal",
+  "homepage": "https://github.com/unional/never-fail",
+  "bugs": {
+    "url": "https://github.com/unional/never-fail/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unional/never-fail.git"
+  },
+  "license": "MIT",
   "files": [
     "dist"
   ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.base.json",
     "clean": "rimraf dist",
@@ -15,51 +24,15 @@
     "lint": "tslint -p tsconfig.json",
     "prepublishOnly": "npm run clean && npm run build",
     "semantic-release": "semantic-release",
-    "test": "tsc --noemit && jest",
-    "verify": "npm run lint && npm run coverage && npm run build && npm run dependency-check",
+    "test": "tsc --noemit && jest --reporters=default",
+    "verify": "npm run lint && npm run build && npm run dependency-check && jest --coverage --reporters=default",
     "watch": "jest --watch"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/unional/never-fail.git"
-  },
-  "bugs": {
-    "url": "https://github.com/unional/never-fail/issues"
-  },
-  "homepage": "https://github.com/unional/never-fail",
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "skipBabel": true
-      }
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "testEnvironment": "node",
-    "testRegex": ".*.spec.ts$",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    }
+  "dependencies": {
+    "tersify": "^3.0.2"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.1",
-    "@types/node": "^10.9.4",
-    "dependency-check": "^3.2.0",
-    "eslint": "^5.5.0",
-    "eslint-plugin-unional": "^1.0.0",
-    "jest": "^23.5.0",
-    "ts-jest": "^23.10.0-beta.2",
-    "tslint": "^5.11.0",
-    "tslint-config-unional": "^0.10.0",
-    "typescript": "^3.0.3"
-  },
-  "dependencies": {
-    "tersify": "^2.0.3"
+    "@types/node": "^12.0.0",
+    "@unional/devpkg-node": "^1.3.0"
   }
 }
