@@ -42,6 +42,8 @@ node_modules
 typings
 
 # project folders
+cjs
 dist
 dist-es5
 dist-es2015
+esm

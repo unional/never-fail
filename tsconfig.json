@@ -1,11 +1,15 @@
 {
-  "extends": "./tsconfig.base.json",
-  "atom": {
-    "rewriteTsconfig": false
-  },
-  "buildOnSave": false,
-  "compileOnSave": false,
+  "extends": "./tsconfig.esm.json",
   "include": [
-    "src"
-  ]
+    "ts",
+    "typings"
+  ],
+  "typedocOptions": {
+    "customTitle": "Determine if two file paths are equal across platforms",
+    "customTitleLink": "https://github.com/unional/never-fail",
+    "entryPoints": [
+      "ts/index.ts"
+    ],
+    "out": "docs"
+  }
 }

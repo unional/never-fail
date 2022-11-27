@@ -1,5 +1,5 @@
 import t from 'assert'
-import { ignoreFailure } from '.';
+import { ignoreFailure } from './index.js'
 
 test('return non-funcion and promise', () => {
   const x = { then: 1 }
@@ -29,7 +29,7 @@ test('wrap returned promise', async () => {
 })
 
 test('ignore rejected result', async () => {
-  function thw() { return new Promise((a, r) => setImmediate(() => r('thw'))) }
+  function thw() { return new Promise((_, r) => setImmediate(() => r('thw'))) }
   t.strictEqual(await ignoreFailure(thw), undefined)
 })
 
