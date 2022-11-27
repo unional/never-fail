@@ -1,6 +1,26 @@
 {
-  "extends": "plugin:unional/latest",
   "env": {
-    "node": true
-  }
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "extends": [
+    "plugin:harmony/latest"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "extends": "plugin:harmony/ts-recommended",
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {
+        "brace-style": "off",
+        "no-empty": "off"
+      }
+    }
+  ]
 }

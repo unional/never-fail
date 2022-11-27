@@ -1,5 +1,5 @@
 import t from 'assert'
-import { warnFailure } from '.';
+import { warnFailure } from './index.js';
 
 test('return non-funcion and promise', () => {
   const x = { then: 1 }
