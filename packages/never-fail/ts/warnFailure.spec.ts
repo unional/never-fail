@@ -28,7 +28,7 @@ test('wrap returned promise', async () => {
 })
 
 test('ignore rejected result', async () => {
-  function thw() { return new Promise((a, r) => setImmediate(() => r('thw'))) }
+  function thw() { return new Promise((_, r) => setImmediate(() => r('thw'))) }
   t.strictEqual(await warnFailure(thw), undefined)
 })
 

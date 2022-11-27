@@ -1,4 +1,5 @@
 export default {
+  displayName: 'never-fail',
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
