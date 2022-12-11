@@ -5,7 +5,8 @@
     "jest": true
   },
   "extends": [
-    "plugin:harmony/latest"
+    "plugin:harmony/latest",
+    "plugin:yml/standard"
   ],
   "parserOptions": {
     "sourceType": "module"
@@ -22,5 +23,14 @@
         "no-empty": "off"
       }
     }
-  ]
+  ],
+  "rules": {
+    "yml/quotes": [
+      "error",
+      {
+        "prefer": "single",
+        "avoidEscape": true
+      }
+    ]
+  }
 }
