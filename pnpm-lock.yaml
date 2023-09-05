@@ -50,8 +50,8 @@ importers:
         specifier: ^0.24.0
         version: 0.24.0(typescript@5.0.2)
       typedoc-plugin-extras:
-        specifier: ^2.3.1
-        version: 2.3.1(typedoc@0.24.0)
+        specifier: ^3.0.0
+        version: 3.0.0(typedoc@0.24.0)
       typedoc-plugin-resolve-crossmodule-references:
         specifier: ^0.3.2
         version: 0.3.2(typedoc@0.24.0)
@@ -6415,10 +6415,10 @@ packages:
       unpartial: 1.0.4
     dev: true
 
-  /typedoc-plugin-extras@2.3.1(typedoc@0.24.0):
-    resolution: {integrity: sha512-EqrIX9oOxJ3yZa/TNAmMqvg87v3RTs63yFm/ROJtjiu1yVNQl74v2hDHsgheWb+1Puy+Vu5jFMwx//Cme0hzqg==}
+  /typedoc-plugin-extras@3.0.0(typedoc@0.24.0):
+    resolution: {integrity: sha512-eiAe3qtm2WbV5owdncpt0zHZPqsNZH2mzNGILPd4zqrvEZie3Et9es4cpGZ+8lHO/SI0pVKwsAj7IuMxPNOdYg==}
     peerDependencies:
-      typedoc: 0.23.x
+      typedoc: 0.25.x
     dependencies:
       typedoc: 0.24.0(typescript@5.0.2)
     dev: true
