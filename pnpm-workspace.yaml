@@ -1,2 +1,16 @@
 packages:
   - packages/*
+
+# pnpm 11 blocks dependency build scripts by default and turns the block into a non-zero
+# exit (ERR_PNPM_IGNORED_BUILDS), so every one of these must be listed or `pnpm install`
+# fails in CI. `allowBuilds` is the pnpm 11 key; `onlyBuiltDependencies` is silently
+# ignored. These three ship prebuilt binaries fetched by their own postinstall.
+allowBuilds:
+  '@swc/core': true
+  # Deliberately false. turbo 1.9.4's postinstall overwrites its own `bin/turbo` JS shim
+  # with the raw platform ELF, which pnpm 11 then links as a node script — `node bin/turbo`
+  # dies on `SyntaxError: Invalid or unexpected token`. Left unbuilt, the shim stays JS and
+  # resolves `turbo-linux-64` itself, which works. Listing it (rather than omitting it)
+  # is what stops ERR_PNPM_IGNORED_BUILDS failing the install.
+  turbo: false
+  esbuild: true
