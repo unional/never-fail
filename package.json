@@ -37,7 +37,7 @@
     "plop": "^3.1.1",
     "rimraf": "~3.0.2",
     "turbo": "1.9.4",
-    "typedoc": "^0.24.0",
+    "typedoc": "^0.28.0",
     "typescript": "^5.0.0"
   },
   "packageManager": "pnpm@11.21.0"
