@@ -1,53 +1,71 @@
-import t from 'assert'
-import { warnFailure } from './index.js';
+import t from 'node:assert'
+import { test } from 'vitest'
+import { warnFailure } from './index.js'
 
 test('return non-funcion and promise', () => {
-  const x = { then: 1 }
-  t.strictEqual(warnFailure(x as any), x)
-  t.strictEqual(warnFailure(1 as any), 1)
-  t.strictEqual(warnFailure(undefined as any), undefined)
-  t.strictEqual(warnFailure(null as any), null)
-  t.strictEqual(warnFailure(false as any), false)
-  t.strictEqual(warnFailure(true as any), true)
-  t.strictEqual(warnFailure('a' as any), 'a')
+	// biome-ignore lint/suspicious/noThenProperty: deliberately a non-promise thenable — the value under test.
+	const x = { then: 1 }
+	t.strictEqual(warnFailure(x as any), x)
+	t.strictEqual(warnFailure(1 as any), 1)
+	t.strictEqual(warnFailure(undefined as any), undefined)
+	t.strictEqual(warnFailure(null as any), null)
+	t.strictEqual(warnFailure(false as any), false)
+	t.strictEqual(warnFailure(true as any), true)
+	t.strictEqual(warnFailure('a' as any), 'a')
 })
 
 test('execute normal function', () => {
-  let called = 0
-  function foo() { called++ }
+	let called = 0
+	function foo() {
+		called++
+	}
 
-  warnFailure(foo)
-  warnFailure(() => called++)
-  t.strictEqual(called, 2)
+	warnFailure(foo)
+	warnFailure(() => called++)
+	t.strictEqual(called, 2)
 })
 
 test('wrap returned promise', async () => {
-  function go() { return new Promise(a => setImmediate(() => a('go'))) }
+	function go() {
+		return new Promise((a) => setImmediate(() => a('go')))
+	}
 
-  t.strictEqual(await warnFailure(go), 'go')
+	t.strictEqual(await warnFailure(go), 'go')
 })
 
 test('ignore rejected result', async () => {
-  function thw() { return new Promise((_, r) => setImmediate(() => r('thw'))) }
-  t.strictEqual(await warnFailure(thw), undefined)
+	function thw() {
+		return new Promise((_, r) => setImmediate(() => r('thw')))
+	}
+	t.strictEqual(await warnFailure(thw), undefined)
 })
 
 test('not reject when fn throws', async () => {
-  t.strictEqual(warnFailure(() => { throw new Error('throwing') }), undefined)
+	t.strictEqual(
+		warnFailure(() => {
+			throw new Error('throwing')
+		}),
+		undefined,
+	)
 })
 
 test('not reject when promise rejects', async () => {
-  t.strictEqual(await warnFailure(Promise.reject('reject')), undefined)
+	t.strictEqual(await warnFailure(Promise.reject('reject')), undefined)
 })
 
 test('custom message', async () => {
-  t.strictEqual(warnFailure(() => { throw new Error('throwing') }, 'doing x'), undefined)
+	t.strictEqual(
+		warnFailure(() => {
+			throw new Error('throwing')
+		}, 'doing x'),
+		undefined,
+	)
 })
 
 test('custom message', async () => {
-  t.strictEqual(await warnFailure(() => Promise.reject('reject'), 'doing x'), undefined)
+	t.strictEqual(await warnFailure(() => Promise.reject('reject'), 'doing x'), undefined)
 })
 
 test('custom message', async () => {
-  t.strictEqual(await warnFailure(Promise.reject('reject'), 'doing x'), undefined)
+	t.strictEqual(await warnFailure(Promise.reject('reject'), 'doing x'), undefined)
 })

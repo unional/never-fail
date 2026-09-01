@@ -1,0 +1,8 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"customTitle": "Run codes and ignore any error",
+	"titleLink": "https://github.com/cyberuni/never-fail",
+	"entryPointStrategy": "packages",
+	"entryPoints": ["packages/never-fail"],
+	"out": "docs"
+}
