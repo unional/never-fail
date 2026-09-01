@@ -3,14 +3,24 @@ packages:
 
 # pnpm 11 blocks dependency build scripts by default and turns the block into a non-zero
 # exit (ERR_PNPM_IGNORED_BUILDS), so every one of these must be listed or `pnpm install`
-# fails in CI. `allowBuilds` is the pnpm 11 key; `onlyBuiltDependencies` is silently
-# ignored. These three ship prebuilt binaries fetched by their own postinstall.
+# fails in CI.
 allowBuilds:
-  '@swc/core': true
-  # Deliberately false. turbo 1.9.4's postinstall overwrites its own `bin/turbo` JS shim
-  # with the raw platform ELF, which pnpm 11 then links as a node script — `node bin/turbo`
-  # dies on `SyntaxError: Invalid or unexpected token`. Left unbuilt, the shim stays JS and
-  # resolves `turbo-linux-64` itself, which works. Listing it (rather than omitting it)
-  # is what stops ERR_PNPM_IGNORED_BUILDS failing the install.
-  turbo: false
+  # size-limit's bundle estimator.
   esbuild: true
+
+# pnpm 11's supply-chain soak defaults to LOOSE: when it meets a package younger than the
+# soak window it does not fail - it appends that package to `minimumReleaseAgeExclude`
+# below and installs it anyway. The soak then excuses itself on every install and the
+# exclusion list grows silently. Strict mode turns a too-young package into a hard
+# ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION instead, so the only exclusions that exist are
+# the ones written here on purpose. This tightens the control; it does not relax it.
+minimumReleaseAgeStrict: true
+
+# Deliberate, exact-version exclusions only. The soak keeps governing everything else.
+minimumReleaseAgeExclude:
+  # `tersify@4.0.6` is this sweep's own upstream release, published hours ago and picked
+  # up here on purpose; `unpartial@1.0.7` is its runtime dependency, from the same
+  # release. Both were auto-excluded by loose mode before the line above landed - kept,
+  # pinned and explained, rather than left as unexplained residue.
+  - tersify@4.0.6
+  - unpartial@1.0.7

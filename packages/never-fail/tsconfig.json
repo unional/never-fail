@@ -1,7 +1,23 @@
 {
-  "extends": "./tsconfig.esm.json",
-  "include": [
-    "ts",
-    "typings"
-  ]
+	"compilerOptions": {
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"lib": ["es2019"],
+		"module": "node16",
+		"moduleResolution": "node16",
+		"newLine": "LF",
+		"noEmit": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "es2019",
+		"types": ["node"]
+	},
+	"include": ["ts", "typings", "tsdown.config.ts", "vitest.config.ts"],
+	"typedocOptions": {
+		"customTitle": "Run codes and ignore any error",
+		"titleLink": "https://github.com/cyberuni/never-fail",
+		"entryPoints": ["./ts/index.ts"]
+	}
 }
