@@ -23,7 +23,7 @@
     "postpack": "pinst --enable"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.25.0",
+    "@changesets/cli": "^3.0.0",
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
@@ -38,9 +38,7 @@
     "rimraf": "~3.0.2",
     "turbo": "1.9.4",
     "typedoc": "^0.24.0",
-    "typedoc-plugin-extras": "^2.3.1",
-    "typedoc-plugin-resolve-crossmodule-references": "^0.3.2",
     "typescript": "^5.0.0"
   },
-  "packageManager": "pnpm@8.5.0"
+  "packageManager": "pnpm@11.21.0"
 }

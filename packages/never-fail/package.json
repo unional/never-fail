@@ -2,13 +2,13 @@
   "name": "never-fail",
   "version": "1.1.4",
   "description": "Check if the file path are equal",
-  "homepage": "https://github.com/unional/never-fail",
+  "homepage": "https://github.com/cyberuni/never-fail",
   "bugs": {
-    "url": "https://github.com/unional/never-fail/issues"
+    "url": "https://github.com/cyberuni/never-fail/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/unional/never-fail.git"
+    "url": "https://github.com/cyberuni/never-fail.git"
   },
   "license": "MIT",
   "author": {
