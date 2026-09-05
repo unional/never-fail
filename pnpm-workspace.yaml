@@ -8,19 +8,18 @@ allowBuilds:
   # size-limit's bundle estimator.
   esbuild: true
 
-# pnpm 11's supply-chain soak defaults to LOOSE: when it meets a package younger than the
-# soak window it does not fail - it appends that package to `minimumReleaseAgeExclude`
-# below and installs it anyway. The soak then excuses itself on every install and the
-# exclusion list grows silently. Strict mode turns a too-young package into a hard
-# ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION instead, so the only exclusions that exist are
-# the ones written here on purpose. This tightens the control; it does not relax it.
+# Supply-chain soak: no dependency may be installed until it is 24h old.
+# `minimumReleaseAge` must be set here rather than in `.npmrc` - `minimumreleaseage`
+# is not a valid npm key, so from `.npmrc` it never reaches pnpm's typed config and
+# the soak is inert.
+#
+# pnpm 11's soak also defaults to LOOSE: when it meets a package younger than the
+# window it does not fail - it appends that package to `minimumReleaseAgeExclude` and
+# installs it anyway, so the soak excuses itself on every install and the exclusion
+# list grows silently. Strict mode turns a too-young package into a hard
+# ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION instead, so the only exclusions that exist
+# are the ones written here on purpose.
+#
+# Strict mode with no window enforces nothing, so the two settings belong together.
+minimumReleaseAge: 1440 # 1 day
 minimumReleaseAgeStrict: true
-
-# Deliberate, exact-version exclusions only. The soak keeps governing everything else.
-minimumReleaseAgeExclude:
-  # `tersify@4.0.6` is this sweep's own upstream release, published hours ago and picked
-  # up here on purpose; `unpartial@1.0.7` is its runtime dependency, from the same
-  # release. Both were auto-excluded by loose mode before the line above landed - kept,
-  # pinned and explained, rather than left as unexplained residue.
-  - tersify@4.0.6
-  - unpartial@1.0.7
